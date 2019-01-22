@@ -72,6 +72,14 @@
 
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray-compa-ABTestingLib</id>
+            <name>compa-ABTestingLib</name>
+            <url>https://api.bintray.com/maven/compa/ABTestingLib/AbtestingLib/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>

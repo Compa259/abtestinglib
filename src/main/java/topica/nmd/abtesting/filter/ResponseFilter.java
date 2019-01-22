@@ -41,21 +41,16 @@ public class ResponseFilter implements Filter {
       String url = httpRequest.getRequestURL().toString();
       String param = httpRequest.getParameter("abtesting");
 
+//      Cookie[] cookies = httpRequest.getCookies();
 
-      System.out.println("AAAAAAAAAAAAAAAAAAAAA");
-      System.out.println(url);
-      System.out.println(param);
-
-      Cookie[] cookies = httpRequest.getCookies();
-
-      if(cookies != null){
-        for(Cookie ck: cookies){
-          System.out.println("TEN CUA COOKIE");
-          System.out.println(ck.getName());
-        }
-      }else{
-        System.out.println("KHONG CO COOKIE");
-      }
+//      if(cookies != null){
+//        for(Cookie ck: cookies){
+//          System.out.println("TEN CUA COOKIE");
+//          System.out.println(ck.getName());
+//        }
+//      }else{
+//        System.out.println("KHONG CO COOKIE");
+//      }
 
       HtmlResponseWrapper capturingResponseWrapper = new HtmlResponseWrapper((HttpServletResponse) response);
       chain.doFilter(request, capturingResponseWrapper);
@@ -71,7 +66,6 @@ public class ResponseFilter implements Filter {
 //      }
 
       if (test != null && test.getStatus() == TestStatusType.ACTIVATED) {
-        System.out.println("VAO VONG LAP IF test");
         ProcessedTestResponse processedTestResponse = restAPIService.getProcessedTest(test);
 
 
@@ -108,7 +102,6 @@ public class ResponseFilter implements Filter {
           response.getWriter().write(source.toString());
         }
       } else {
-        System.out.println("KHONG VAO VONG LAP IF test");
         if (response.getContentType() != null && response.getContentType().contains("application/json")) {
           String content = capturingResponseWrapper.getCaptureAsString();
           response.setContentLength(content.length());

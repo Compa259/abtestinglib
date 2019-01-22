@@ -126,16 +126,12 @@ public class RestAPIServiceImpl implements RestAPIService {
   public void updateTrackingUser(String payload) {
     Gson gson = new Gson();
     ClientId clientId = gson.fromJson(payload, ClientId.class);
-    System.out.println("WTF: " + clientId.getTempId());
-    AccountRequestDTO[] accountRequestDTOS = restTemplate.getForObject(urlAccountRequest + "?accountId=" + "ducnm11@topica.edu.vn", AccountRequestDTO[].class);
-    System.out.println("--------00000----------");
+    AccountRequestDTO[] accountRequestDTOS = restTemplate.getForObject(urlAccountRequest + "?accountId=" + clientId.getTempId(), AccountRequestDTO[].class);
 
-    List<Long> listAccountRequestId = new ArrayList<>();
     if(accountRequestDTOS.length > 0){
       String listAccountRequest = "";
       for(int i = 0; i < accountRequestDTOS.length ; i++) {
-        listAccountRequestId.add(accountRequestDTOS[i].getTestCaseId());
-        listAccountRequest += String.valueOf(accountRequestDTOS[i].getTestCaseId()) + ",";
+        listAccountRequest += String.valueOf(accountRequestDTOS[i].getId()) + ",";
       }
       restTemplate.getForObject(urlUpdateAccountRequest + "?accountId=" + clientId.getClientId() + "&listId=" + listAccountRequest, AccountRequest.class);
     }
