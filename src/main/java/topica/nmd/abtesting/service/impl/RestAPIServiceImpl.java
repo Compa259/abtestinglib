@@ -71,7 +71,7 @@ public class RestAPIServiceImpl implements RestAPIService {
   public Test checkRequestBelongToTest(String request) {
     for(Test test: listAllTest){
       String description = test.getDescription();
-      if(request.equals(description)){
+      if(request.startsWith(description)){
         return test;
       }
     }

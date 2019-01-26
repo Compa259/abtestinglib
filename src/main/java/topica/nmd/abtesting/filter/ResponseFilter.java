@@ -96,7 +96,6 @@ public class ResponseFilter implements Filter {
           Gson gson = builder.serializeNulls().create();
           String abtesting = gson.toJson(abTestingData);
 
-//          restAPIService.saveUserTracking("", processedTestResponse.getTestCase());
           appendABTestingData(source, abtesting);
 
           response.getWriter().write(source.toString());
